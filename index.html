@@ -54,3 +54,248 @@
             border-radius: 8px;
             display: flex;
         }
+
+        .brand-title h2 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .brand-title p {
+            font-size: 11px;
+            color: #a29bfe;
+            font-weight: 500;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #a0a0a0;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #4834d4;
+            color: #fff;
+        }
+
+        .card {
+            background: #13102b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .admin-box {
+            text-align: center;
+        }
+
+        .admin-icon {
+            background: rgba(108, 92, 231, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: #a29bfe;
+        }
+
+        .admin-box h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .admin-box p {
+            font-size: 13px;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        input[type="password"], input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1a1638;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 16px;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #6c757d;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            background: #a29bfe;
+            color: #0f0c20;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #8c7ae6;
+        }
+
+        .note {
+            font-size: 12px;
+            color: #8c7ae6;
+            margin-top: 16px;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 24px;
+        }
+
+        .footer-text span {
+            color: #00b894;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .dashboard-content {
+            text-align: left;
+        }
+        .folder-item {
+            background: #1a1638;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- হেডার (যেখানে Junied Hossain লেখাটি যুক্ত করা হয়েছে) -->
+        <div class="header">
+            <div class="brand">
+                <div class="brand-icon">🔒</div>
+                <div class="brand-title">
+                    <h2>Secure Vault</h2>
+                    <p>Junied Hossain</p>
+                </div>
+            </div>
+            <div class="nav-tabs">
+                <button class="tab-btn" onclick="showTab('visitor')">🔑 Visitor<br>Access</button>
+                <button class="tab-btn active" onclick="showTab('admin')">👤 Admin<br>Panel</button>
+            </div>
+        </div>
+
+        <!-- মূল কন্টেন্ট এরিয়া -->
+        <div id="mainContent">
+            <!-- অ্যাডমিন প্যানেল লগইন স্ক্রিন -->
+            <div id="adminTab" class="card admin-box">
+                <div class="admin-icon">👤⚙️</div>
+                <h3>অ্যাডমিন প্যানেল</h3>
+                <p>অ্যাডমিন সিকিউরিটি কোড প্রদান করুন</p>
+                
+                <input type="password" id="master-pass" placeholder="Master Password প্রদান করুন">
+                <button class="btn-primary" onclick="checkAdminLogin()">লগইন করুন</button>
+                
+                <p class="note">* প্রথমবার সিকিউরিটি কোড: Junied Hossain</p>
+            </div>
+
+            <!-- ভিজিটর এক্সেস প্যানেল -->
+            <div id="visitorTab" class="card admin-box hidden">
+                <div class="admin-icon">📂</div>
+                <h3>ভিজিটর এক্সেস</h3>
+                <p>ফোল্ডার আনলক করতে পাসওয়ার্ড দিন</p>
+                
+                <input type="password" id="visitor-pass" placeholder="ফোল্ডার পাসওয়ার্ড দিন">
+                <button class="btn-primary" onclick="checkVisitorLogin()">আনলক করুন</button>
+            </div>
+        </div>
+
+        <!-- ফুটাবার -->
+        <div class="footer-text">
+            Ready to deploy on <span>Netlify</span> • Powered by Web LocalStorage
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            const adminTab = document.getElementById('adminTab');
+            const visitorTab = document.getElementById('visitorTab');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            if (tabName === 'admin') {
+                adminTab.classList.remove('hidden');
+                visitorTab.classList.add('hidden');
+                buttons[1].classList.add('active');
+                buttons[0].classList.remove('active');
+            } else {
+                visitorTab.classList.remove('hidden');
+                adminTab.classList.add('hidden');
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            }
+        }
+
+        // সঠিক পাসওয়ার্ড (01767887896) দিয়ে এন্টার করার লজিক
+        function checkAdminLogin() {
+            const inputPass = document.getElementById('master-pass').value;
+            
+            if (inputPass === '01767887896') {
+                alert('সফলভাবে লগইন হয়েছে!');
+                
+                // 🔗 এখানে আপনার কাঙ্ক্ষিত লিংকটি বসিয়ে দিন যা পাসওয়ার্ড দেওয়ার সাথে ওপেন হবে:
+                window.open('https://example.com', '_blank');
+
+                // অ্যাডমিন প্যানেলের ভেতরের ইন্টারফেস
+                document.getElementById('mainContent').innerHTML = `
+                    <div class="card dashboard-content">
+                        <h3>Admin Dashboard</h3>
+                        <p style="color: #a29bfe; font-size: 13px; margin-bottom: 15px;">স্বাগতম Junied Hossain! আপনি এখন অ্যাডমিন প্যানেলে আছেন।</p>
+                        <div class="folder-item">
+                            <span>📁 সংরক্ষিত ফোল্ডার ও ফাইল ম্যানেজমেন্ট</span>
+                        </div>
+                        <button class="btn-primary" onclick="location.reload()" style="margin-top: 15px; background: #e74c3c; color: white;">লগআউট করুন</button>
+                    </div>
+                `;
+            } else {
+                alert('ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।');
+            }
+        }
+
+        function checkVisitorLogin() {
+            const visitorPass = document.getElementById('visitor-pass').value;
+            if (visitorPass) {
+                alert('ফোল্ডার আনলক করা হয়েছে!');
+            } else {
+                alert('দয়া করে পাসওয়ার্ড দিন!');
+            }
+        }
+    </script>
+</body>
+</html>
