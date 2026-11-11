@@ -267,6 +267,9 @@
     </div>
 
     <script>
+        // আপনার কাঙ্ক্ষিত আসল লিংকটি এখানে একবার বসিয়ে দিন (নিচের দুটি জায়গায় স্বয়ংক্রিয়ভাবে কাজ করবে)
+        const myTargetLink = "https://your-actual-link.com"; 
+
         function showTab(tabName) {
             const adminTab = document.getElementById('adminTab');
             const visitorTab = document.getElementById('visitorTab');
@@ -289,13 +292,14 @@
         function checkAdminLogin() {
             const inputPass = document.getElementById('master-pass').value;
             
+            // সঠিক অ্যাডমিন পাসওয়ার্ড
             if (inputPass === '01767887896') {
                 alert('সফলভাবে লগইন হয়েছে!');
                 
-                // 🔗 পাসওয়ার্ড দেওয়ার সাথে সাথে যে লিংকটি ওপেন হবে:
-                window.open('https://example.com', '_blank');
+                // পাসওয়ার্ড দেওয়ার সাথে সাথে আপনার লিংকটি নতুন ট্যাবে ওপেন হবে
+                window.open(myTargetLink, '_blank');
 
-                // সবার জন্য নির্দিষ্ট ফিক্সড ফাইল ও লিংক ড্যাশবোর্ডে দেখাবে
+                // সবার জন্য নির্দিষ্ট ড্যাশবোর্ড ও লিংক দেখাবে
                 document.getElementById('mainContent').innerHTML = `
                     <div class="card dashboard-content">
                         <h3>Admin Dashboard</h3>
@@ -307,22 +311,22 @@
 
                         <div class="file-box">
                             <h4>আপনার যুক্ত করা ফাইল/লিংক:</h4>
-                            <p style="font-size: 13px; color: #ccc;">এখানে আপনার কাঙ্ক্ষিত ফাইল বা লিংকটি সবার জন্য সেভ করা আছে।</p>
-                            <a href="https://example.com" target="_blank">লিংকটি ওপেন করুন</a>
+                            <p style="font-size: 13px; color: #ccc;">সবার জন্য নির্দিষ্ট লিংকটি নিচে দেওয়া হলো:</p>
+                            <a href="${myTargetLink}" target="_blank">লিংকটি ওপেন করুন</a>
                         </div>
 
                         <button class="btn-primary" onclick="location.reload()" style="margin-top: 20px; background: #e74c3c; color: white;">লগআউট করুন</button>
                     </div>
                 `;
             } else {
-                alert('ভুল পাসওয়ার্ড! আবার চেষ্টা করুন। ঠিক পাসওয়ার্ড দিন।');
+                alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।');
             }
         }
 
         // ভিজিটর লগইন চেক
         function checkVisitorLogin() {
             const visitorPass = document.getElementById('visitor-pass').value;
-            // ভিজিটরের জন্য নির্দিষ্ট পাসওয়ার্ড সেট করতে পারেন (যেমন: '1234')
+            // ভিজিটরের পাসওয়ার্ড (প্রয়োজনে পরিবর্তন করতে পারেন, যেমন: '1234')
             if (visitorPass === '1234') {
                 alert('ফোল্ডার সফলভাবে আনলক করা হয়েছে!');
                 document.getElementById('mainContent').innerHTML = `
@@ -330,7 +334,7 @@
                         <h3>ভিজিটর ফোল্ডার</h3>
                         <div class="file-box">
                             <h4>সংরক্ষিত ফাইলসমূহ:</h4>
-                            <a href="https://example.com" target="_blank">ফাইল বা লিংক ওপেন করুন</a>
+                            <a href="${myTargetLink}" target="_blank">ফাইল বা লিংক ওপেন করুন</a>
                         </div>
                         <button class="btn-primary" onclick="location.reload()" style="margin-top: 20px; background: #4834d4; color: white;">ফিরে যান</button>
                     </div>
