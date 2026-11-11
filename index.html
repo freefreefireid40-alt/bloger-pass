@@ -267,7 +267,7 @@
     </div>
 
     <script>
-        // আপনার কাঙ্ক্ষিত আসল লিংকটি এখানে একবার বসিয়ে দিন (নিচের দুটি জায়গায় স্বয়ংক্রিয়ভাবে কাজ করবে)
+        // ⚠️ গুরুত্বপূর্ণ: নিচের কোটেশনের ভেতরে "https://your-actual-link.com" কেটে আপনার আসল লিংকটি বসিয়ে দিন।
         const myTargetLink = "https://your-actual-link.com"; 
 
         function showTab(tabName) {
@@ -292,11 +292,11 @@
         function checkAdminLogin() {
             const inputPass = document.getElementById('master-pass').value;
             
-            // সঠিক অ্যাডমিন পাসওয়ার্ড
+            // সঠিক অ্যাডমিন পাসওয়ার্ড (01767887896)
             if (inputPass === '01767887896') {
                 alert('সফলভাবে লগইন হয়েছে!');
                 
-                // পাসওয়ার্ড দেওয়ার সাথে সাথে আপনার লিংকটি নতুন ট্যাবে ওপেন হবে
+                // সঠিক পাসওয়ার্ড দেওয়ার সাথে সাথে আপনার লিংকটি নতুন ট্যাবে ওপেন হবে
                 window.open(myTargetLink, '_blank');
 
                 // সবার জন্য নির্দিষ্ট ড্যাশবোর্ড ও লিংক দেখাবে
@@ -326,7 +326,7 @@
         // ভিজিটর লগইন চেক
         function checkVisitorLogin() {
             const visitorPass = document.getElementById('visitor-pass').value;
-            // ভিজিটরের পাসওয়ার্ড (প্রয়োজনে পরিবর্তন করতে পারেন, যেমন: '1234')
+            // ভিজিটরের পাসওয়ার্ড (প্রয়োজনে পরিবর্তন করতে পারেন)
             if (visitorPass === '1234') {
                 alert('ফোল্ডার সফলভাবে আনলক করা হয়েছে!');
                 document.getElementById('mainContent').innerHTML = `
