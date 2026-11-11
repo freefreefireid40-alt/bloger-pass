@@ -3,345 +3,561 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Vault - Junied Hossain</title>
+    <title>Secure Link & Folder Vault</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         body {
-            background-color: #0f0c20;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #0f172a 50%, #030712 100%);
             min-height: 100vh;
-            padding: 20px;
         }
-
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background: #1a1638;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            background: #13102b;
-            padding: 12px;
-            border-radius: 12px;
+        .glow-button {
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
         }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .glow-button:hover {
+            box-shadow: 0 0 30px rgba(129, 140, 248, 0.6);
         }
-
-        .brand-icon {
-            background: #6c5ce7;
-            padding: 8px;
-            border-radius: 8px;
-            display: flex;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-
-        .brand-title h2 {
-            font-size: 15px;
-            font-weight: 600;
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
         }
-
-        .brand-title p {
-            font-size: 11px;
-            color: #a29bfe;
-            font-weight: 500;
+        ::-webkit-scrollbar-thumb {
+            background: rgba(129, 140, 248, 0.3);
+            border-radius: 3px;
         }
-
-        .nav-tabs {
-            display: flex;
-            gap: 6px;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: none;
-            color: #a0a0a0;
-            padding: 6px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background: #4834d4;
-            color: #fff;
-        }
-
-        .card {
-            background: #13102b;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .admin-box {
-            text-align: center;
-        }
-
-        .admin-icon {
-            background: rgba(108, 92, 231, 0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-            color: #a29bfe;
-        }
-
-        .admin-box h3 {
-            font-size: 20px;
-            margin-bottom: 6px;
-        }
-
-        .admin-box p {
-            font-size: 13px;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-        }
-
-        input[type="password"], input[type="text"] {
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: #1a1638;
-            color: #fff;
-            font-size: 14px;
-            margin-bottom: 16px;
-            outline: none;
-        }
-
-        input::placeholder {
-            color: #6c757d;
-        }
-
-        .btn-primary {
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            border: none;
-            background: #a29bfe;
-            color: #0f0c20;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #8c7ae6;
-        }
-
-        .note {
-            font-size: 12px;
-            color: #8c7ae6;
-            margin-top: 16px;
-        }
-
-        .footer-text {
-            text-align: center;
-            font-size: 11px;
-            color: #6c757d;
-            margin-top: 24px;
-        }
-
-        .footer-text span {
-            color: #00b894;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .dashboard-content {
-            text-align: left;
-        }
-        .folder-item {
-            background: #1a1638;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .file-box {
-            background: #1a1638;
-            padding: 14px;
-            border-radius: 10px;
-            margin-top: 15px;
-            text-align: left;
-        }
-        .file-box h4 {
-            font-size: 15px;
-            margin-bottom: 8px;
-            color: #00b894;
-        }
-        .file-box a {
-            display: inline-block;
-            background: #00b894;
-            color: #0f0c20;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            margin-top: 8px;
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(129, 140, 248, 0.6);
         }
     </style>
 </head>
-<body>
+<body class="text-slate-100 flex flex-col justify-between p-4 md:p-8 relative overflow-x-hidden">
 
-    <div class="container">
-        <!-- হেডার -->
-        <div class="header">
-            <div class="brand">
-                <div class="brand-icon">🔒</div>
-                <div class="brand-title">
-                    <h2>Secure Vault</h2>
-                    <p>Junied Hossain</p>
+    <!-- Top Bar Navigation -->
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center mb-8 glass rounded-2xl p-4">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('visitor')">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                <i class="fa-solid fa-vault text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight tracking-wide text-white">Secure Vault</h1>
+                <p class="text-xs text-indigo-300">Protected Folder Access</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2">
+            <button id="navVisitorBtn" onclick="switchTab('visitor')" class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 bg-indigo-600/30 text-indigo-200 border border-indigo-500/30 hover:bg-indigo-600/50">
+                <i class="fa-solid fa-key mr-1.5"></i> Visitor Access
+            </button>
+            <button id="navAdminBtn" onclick="switchTab('admin')" class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700/50 border border-slate-700/50">
+                <i class="fa-solid fa-user-shield mr-1.5"></i> Admin Panel
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-center">
+
+        <!-- ================= VISITOR VIEW ================= -->
+        <div id="visitorView" class="w-full transition-all duration-300">
+            <!-- Password Input Card -->
+            <div id="passwordCard" class="glass rounded-3xl p-6 md:p-10 shadow-2xl max-w-md mx-auto text-center border border-indigo-500/20">
+                <div class="w-16 h-16 bg-gradient-to-br from-indigo-500/20 to-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-indigo-400 border border-indigo-500/30">
+                    <i class="fa-solid fa-lock text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2 text-white">ফোল্ডার এক্সেস করুন</h2>
+                <p class="text-slate-400 text-sm mb-6">আপনার নির্দিষ্ট ফোল্ডারের পাসওয়ার্ডটি নিচে লিখুন</p>
+
+                <form onsubmit="handlePasswordSubmit(event)" class="space-y-4">
+                    <div class="relative">
+                        <input type="password" id="visitorPasswordInput" placeholder="পাসওয়ার্ড প্রবেশ করুন" required
+                            class="w-full bg-slate-900/80 border border-slate-700/80 focus:border-indigo-500 rounded-xl px-4 py-3.5 pl-11 text-white placeholder-slate-500 outline-none transition-all duration-200">
+                        <i class="fa-solid fa-key absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-medium py-3.5 px-6 rounded-xl transition-all duration-300 glow-button flex items-center justify-center space-x-2">
+                        <span>আনলক করুন</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </form>
+
+                <!-- Status Message -->
+                <div id="statusMessage" class="hidden mt-4 p-3 rounded-xl text-sm font-medium"></div>
+            </div>
+
+            <!-- Folder Content Unlocked View (Initially Hidden) -->
+            <div id="unlockedFolderView" class="hidden glass rounded-3xl p-6 md:p-8 shadow-2xl max-w-2xl mx-auto border border-emerald-500/20">
+                <div class="flex justify-between items-start mb-6 pb-4 border-b border-slate-700/50">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+                            <i class="fa-solid fa-folder-open text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Unlocked</span>
+                            <h2 id="unlockedFolderName" class="text-2xl font-bold text-white mt-0.5">---</h2>
+                        </div>
+                    </div>
+                    <button onclick="lockVault()" class="text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-700/60 px-3 py-1.5 rounded-xl text-xs font-medium transition border border-slate-700">
+                        <i class="fa-solid fa-lock mr-1"></i> Lock Again
+                    </button>
+                </div>
+
+                <p id="unlockedFolderDesc" class="text-slate-300 text-sm mb-6 bg-slate-900/60 p-4 rounded-xl border border-slate-800">---</p>
+
+                <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">সংযুক্ত লিংক/ফাইলসমূহ:</h3>
+                
+                <div id="linksContainer" class="space-y-3 max-h-80 overflow-y-auto pr-1">
+                    <!-- Links will be populated here -->
                 </div>
             </div>
-            <div class="nav-tabs">
-                <button class="tab-btn" onclick="showTab('visitor')">🔑 Visitor<br>Access</button>
-                <button class="tab-btn active" onclick="showTab('admin')">👤 Admin<br>Panel</button>
+        </div>
+
+        <!-- ================= ADMIN PANEL ================= -->
+        <div id="adminView" class="hidden w-full transition-all duration-300">
+            <!-- Admin Authentication Layer -->
+            <div id="adminAuthCard" class="glass rounded-3xl p-6 md:p-10 shadow-2xl max-w-md mx-auto text-center border border-purple-500/20">
+                <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-purple-400 border border-purple-500/20">
+                    <i class="fa-solid fa-user-gear text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2 text-white">অ্যাডমিন প্যানেল</h2>
+                <p class="text-slate-400 text-sm mb-6">অ্যাডমিন সিকিউরিটি কোড প্রদান করুন</p>
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <input type="password" id="adminMasterPassword" placeholder="Master Password প্রবেশ করুন" required
+                        class="w-full bg-slate-900/80 border border-slate-700/80 focus:border-purple-500 rounded-xl px-4 py-3.5 text-white placeholder-slate-500 outline-none">
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium py-3.5 rounded-xl transition shadow-lg shadow-purple-500/20">
+                        লগইন করুন
+                    </button>
+                </form>
+            </div>
+
+            <!-- Admin Dashboard (Initially Hidden) -->
+            <div id="adminDashboard" class="hidden space-y-6">
+                <!-- Top Control Banner -->
+                <div class="glass rounded-2xl p-5 flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold flex items-center gap-2 text-white">
+                            <span>অ্যাডমিন কন্ট্রোল সেন্টার</span>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full">Active Session</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">নতুন ফোল্ডার ও লিংক যুক্ত বা ম্যানেজ করুন</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="exportData()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2 rounded-xl border border-slate-700 transition">
+                            <i class="fa-solid fa-download mr-1"></i> Backup JSON
+                        </button>
+                        <label class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2 rounded-xl border border-slate-700 transition cursor-pointer">
+                            <i class="fa-solid fa-upload mr-1"></i> Restore JSON
+                            <input type="file" id="importFileInput" onchange="importData(event)" accept=".json" class="hidden">
+                        </label>
+                        <button onclick="logoutAdmin()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs px-3 py-2 rounded-xl border border-red-500/20 transition">
+                            <i class="fa-solid fa-right-from-bracket mr-1"></i> Exit Admin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Add New Folder Form -->
+                <div class="glass rounded-2xl p-6 border border-slate-700/50">
+                    <h3 class="text-lg font-semibold mb-4 text-indigo-300 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-plus"></i> নতুন ফোল্ডার যোগ করুন
+                    </h3>
+                    <form onsubmit="handleCreateFolder(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">ফোল্ডারের নাম</label>
+                                <input type="text" id="newFolderName" placeholder="যেমন: Personal Photo" required
+                                    class="w-full bg-slate-900/80 border border-slate-700/80 focus:border-indigo-500 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-600 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">ফোল্ডার পাসওয়ার্ড (লজিক অনুযায়ী)</label>
+                                <input type="text" id="newFolderPassword" placeholder="যেমন: 1616" required
+                                    class="w-full bg-slate-900/80 border border-slate-700/80 focus:border-indigo-500 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-600 outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">বিবরণ / নোট (ঐচ্ছিক)</label>
+                            <input type="text" id="newFolderDesc" placeholder="সংক্ষিপ্ত বিবরণ বা ফাইল সম্পর্কিত তথ্য"
+                                class="w-full bg-slate-900/80 border border-slate-700/80 focus:border-indigo-500 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-600 outline-none">
+                        </div>
+
+                        <!-- Dynamic Link Inputs -->
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">ফাইল/ড্রাইভ লিংকসমূহ</label>
+                            <div id="linkInputsContainer" class="space-y-2">
+                                <div class="flex gap-2">
+                                    <input type="text" placeholder="লিংকের নাম (যেমন: Google Drive Link)" class="link-title-input w-1/3 bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                                    <input type="url" placeholder="URL (https://...)" class="link-url-input w-2/3 bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none" required>
+                                </div>
+                            </div>
+                            <button type="button" onclick="addMoreLinkInput()" class="mt-2 text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1">
+                                <i class="fa-solid fa-plus"></i> আরও লিংক যোগ করুন
+                            </button>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-medium py-3 rounded-xl transition text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20">
+                            <i class="fa-solid fa-save"></i> ফোল্ডার সেভ করুন
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Existing Folders List -->
+                <div class="glass rounded-2xl p-6 border border-slate-700/50">
+                    <h3 class="text-lg font-semibold mb-4 text-slate-200 flex items-center justify-between">
+                        <span>সংরক্ষিত ফোল্ডারসমূহ</span>
+                        <span id="folderCountBadge" class="text-xs bg-indigo-500/20 text-indigo-300 px-2.5 py-1 rounded-full border border-indigo-500/30">0 Folders</span>
+                    </h3>
+                    <div id="adminFoldersList" class="space-y-4">
+                        <!-- Admin Folder Items Output -->
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- মূল কন্টেন্ট এরিয়া -->
-        <div id="mainContent">
-            <!-- অ্যাডমিন প্যানেল লগইন স্ক্রিন -->
-            <div id="adminTab" class="card admin-box">
-                <div class="admin-icon">👤⚙️</div>
-                <h3>অ্যাডমিন প্যানেল</h3>
-                <p>অ্যাডমিন সিকিউরিটি কোড প্রদান করুন</p>
-                
-                <input type="password" id="master-pass" placeholder="Master Password প্রদান করুন">
-                <button class="btn-primary" onclick="checkAdminLogin()">লগইন করুন</button>
-                
-                <p class="note">* প্রথমবার সিকিউরিটি কোড: Junied Hossain</p>
-            </div>
+    </main>
 
-            <!-- ভিজিটর এক্সেস প্যানেল -->
-            <div id="visitorTab" class="card admin-box hidden">
-                <div class="admin-icon">📂</div>
-                <h3>ভিজিটর এক্সেস</h3>
-                <p>ফোল্ডার আনলক করতে পাসওয়ার্ড দিন</p>
-                
-                <input type="password" id="visitor-pass" placeholder="ফোল্ডার পাসওয়ার্ড দিন">
-                <button class="btn-primary" onclick="checkVisitorLogin()">আনলক করুন</button>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto w-full text-center mt-8 text-xs text-slate-500">
+        <p>Ready to deploy on <span class="text-indigo-400 font-semibold">Netlify</span> • Secure Vault Protected</p>
+    </footer>
 
-        <!-- ফুটাবার -->
-        <div class="footer-text">
-            Ready to deploy on <span>Netlify</span> • Powered by Web LocalStorage
-        </div>
-    </div>
-
+    <!-- JavaScript Application Logic -->
     <script>
-        // ⚠️ গুরুত্বপূর্ণ: নিচের কোটেশনের ভেতরে "https://your-actual-link.com" কেটে আপনার আসল লিংকটি বসিয়ে দিন।
-        const myTargetLink = "https://your-actual-link.com"; 
+        // Configured Master Password
+        const ADMIN_PASS_HASH = "01767887896";
 
-        function showTab(tabName) {
-            const adminTab = document.getElementById('adminTab');
-            const visitorTab = document.getElementById('visitorTab');
-            const buttons = document.querySelectorAll('.tab-btn');
-
-            if (tabName === 'admin') {
-                adminTab.classList.remove('hidden');
-                visitorTab.classList.add('hidden');
-                buttons[1].classList.add('active');
-                buttons[0].classList.remove('active');
-            } else {
-                visitorTab.classList.remove('hidden');
-                adminTab.classList.add('hidden');
-                buttons[0].classList.add('active');
-                buttons[1].classList.remove('active');
+        // Default Initial Vault Data
+        const defaultVaultData = [
+            {
+                id: "folder-1",
+                name: "Personal Photo",
+                password: "1616",
+                description: "আমার পার্সোনাল ছবি এবং ড্রাইভ গ্যালারির লিংকসমূহ",
+                links: [
+                    { title: "Google Drive Folder", url: "https://drive.google.com" },
+                    { title: "HD Image Backup", url: "https://photos.google.com" }
+                ]
+            },
+            {
+                id: "folder-2",
+                name: "Friends Folder",
+                password: "66",
+                description: "বন্ধুদের সাথে তোলা সব ছবির ফাইল",
+                links: [
+                    { title: "Friends Mega Folder", url: "https://mega.nz" }
+                ]
             }
+        ];
+
+        // Global State
+        let vaultData = [];
+        let isAdminLoggedIn = false;
+
+        // Load Initial Data
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedData = localStorage.getItem('secure_vault_data');
+            if (savedData) {
+                try {
+                    vaultData = JSON.parse(savedData);
+                } catch (e) {
+                    vaultData = defaultVaultData;
+                    saveVaultData();
+                }
+            } else {
+                vaultData = defaultVaultData;
+                saveVaultData();
+            }
+            renderAdminFolders();
+        });
+
+        // Save Data to LocalStorage
+        function saveVaultData() {
+            localStorage.setItem('secure_vault_data', JSON.stringify(vaultData));
         }
 
-        // অ্যাডমিন পাসওয়ার্ড চেক এবং অটো-লিংক ওপেন করার লজিক
-        function checkAdminLogin() {
-            const inputPass = document.getElementById('master-pass').value;
-            
-            // সঠিক অ্যাডমিন পাসওয়ার্ড (01767887896)
-            if (inputPass === '01767887896') {
-                alert('সফলভাবে লগইন হয়েছে!');
+        // Tab Switching Handler
+        function switchTab(tab) {
+            const visitorView = document.getElementById('visitorView');
+            const adminView = document.getElementById('adminView');
+            const navVisitorBtn = document.getElementById('navVisitorBtn');
+            const navAdminBtn = document.getElementById('navAdminBtn');
+
+            if (tab === 'visitor') {
+                visitorView.classList.remove('hidden');
+                adminView.classList.add('hidden');
                 
-                // সঠিক পাসওয়ার্ড দেওয়ার সাথে সাথে আপনার লিংকটি নতুন ট্যাবে ওপেন হবে
-                window.open(myTargetLink, '_blank');
-
-                // সবার জন্য নির্দিষ্ট ড্যাশবোর্ড ও লিংক দেখাবে
-                document.getElementById('mainContent').innerHTML = `
-                    <div class="card dashboard-content">
-                        <h3>Admin Dashboard</h3>
-                        <p style="color: #a29bfe; font-size: 13px; margin-bottom: 15px;">স্বাগতম Junied Hossain!</p>
-                        
-                        <div class="folder-item">
-                            <span>📁 সংরক্ষিত ফোল্ডার ও ফাইল ম্যানেজমেন্ট</span>
-                        </div>
-
-                        <div class="file-box">
-                            <h4>আপনার যুক্ত করা ফাইল/লিংক:</h4>
-                            <p style="font-size: 13px; color: #ccc;">সবার জন্য নির্দিষ্ট লিংকটি নিচে দেওয়া হলো:</p>
-                            <a href="${myTargetLink}" target="_blank">লিংকটি ওপেন করুন</a>
-                        </div>
-
-                        <button class="btn-primary" onclick="location.reload()" style="margin-top: 20px; background: #e74c3c; color: white;">লগআউট করুন</button>
-                    </div>
-                `;
+                navVisitorBtn.className = "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 bg-indigo-600/30 text-indigo-200 border border-indigo-500/30 hover:bg-indigo-600/50";
+                navAdminBtn.className = "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700/50 border border-slate-700/50";
             } else {
-                alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।');
+                visitorView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+
+                navAdminBtn.className = "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 bg-purple-600/30 text-purple-200 border border-purple-500/30 hover:bg-purple-600/50";
+                navVisitorBtn.className = "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 bg-slate-800/50 text-slate-400 hover:text-white hover:bg-slate-700/50 border border-slate-700/50";
             }
         }
 
-        // ভিজিটর লগইন চেক
-        function checkVisitorLogin() {
-            const visitorPass = document.getElementById('visitor-pass').value;
-            // ভিজিটরের পাসওয়ার্ড (প্রয়োজনে পরিবর্তন করতে পারেন)
-            if (visitorPass === '1234') {
-                alert('ফোল্ডার সফলভাবে আনলক করা হয়েছে!');
-                document.getElementById('mainContent').innerHTML = `
-                    <div class="card dashboard-content">
-                        <h3>ভিজিটর ফোল্ডার</h3>
-                        <div class="file-box">
-                            <h4>সংরক্ষিত ফাইলসমূহ:</h4>
-                            <a href="${myTargetLink}" target="_blank">ফাইল বা লিংক ওপেন করুন</a>
+        // ================= VISITOR HANDLERS =================
+        function handlePasswordSubmit(event) {
+            event.preventDefault();
+            const inputPass = document.getElementById('visitorPasswordInput').value.trim();
+            const statusMsg = document.getElementById('statusMessage');
+            
+            // Search for matching folder
+            const matchedFolder = vaultData.find(f => f.password === inputPass);
+
+            if (matchedFolder) {
+                // Show Success
+                statusMsg.className = "mt-4 p-3 rounded-xl text-sm font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 block";
+                statusMsg.innerText = "পাসওয়ার্ড সঠিক হয়েছে! ফোল্ডার খোলা হচ্ছে...";
+
+                setTimeout(() => {
+                    displayUnlockedFolder(matchedFolder);
+                    document.getElementById('passwordCard').classList.add('hidden');
+                    statusMsg.classList.add('hidden');
+                    document.getElementById('visitorPasswordInput').value = '';
+                }, 600);
+            } else {
+                // Show Error
+                statusMsg.className = "mt-4 p-3 rounded-xl text-sm font-medium bg-red-500/20 text-red-300 border border-red-500/30 block";
+                statusMsg.innerText = "ভুল পাসওয়ার্ড! কোন ফোল্ডার খুঁজে পাওয়া যায়নি।";
+            }
+        }
+
+        function displayUnlockedFolder(folder) {
+            const unlockedView = document.getElementById('unlockedFolderView');
+            document.getElementById('unlockedFolderName').innerText = folder.name;
+            document.getElementById('unlockedFolderDesc').innerText = folder.description || "কোন অতিরিক্ত বিবরণ দেওয়া নেই।";
+
+            const linksContainer = document.getElementById('linksContainer');
+            linksContainer.innerHTML = '';
+
+            if (folder.links && folder.links.length > 0) {
+                folder.links.forEach((link) => {
+                    const linkEl = document.createElement('div');
+                    linkEl.className = "glass-card p-4 rounded-2xl flex items-center justify-between gap-3 hover:border-emerald-500/40 transition duration-200";
+                    linkEl.innerHTML = `
+                        <div class="flex items-center space-x-3 overflow-hidden">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800/80 flex items-center justify-center text-slate-300 flex-shrink-0">
+                                <i class="fa-solid fa-link"></i>
+                            </div>
+                            <div class="truncate">
+                                <h4 class="text-sm font-semibold text-white truncate">${escapeHtml(link.title || 'অনামাহীন ফাইল লিংক')}</h4>
+                                <p class="text-xs text-slate-400 truncate">${escapeHtml(link.url)}</p>
+                            </div>
                         </div>
-                        <button class="btn-primary" onclick="location.reload()" style="margin-top: 20px; background: #4834d4; color: white;">ফিরে যান</button>
+                        <div class="flex items-center space-x-2 flex-shrink-0">
+                            <button onclick="copyToClipboard('${escapeHtml(link.url)}', this)" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-1.5 rounded-lg text-xs transition">
+                                <i class="fa-solid fa-copy mr-1"></i> Copy
+                            </button>
+                            <a href="${escapeHtml(link.url)}" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center">
+                                <span>Open</span> <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    `;
+                    linksContainer.appendChild(linkEl);
+                });
+            } else {
+                linksContainer.innerHTML = `<p class="text-xs text-slate-500 italic">এই ফোল্ডারে এখনো কোন লিংক যোগ করা হয়নি।</p>`;
+            }
+
+            unlockedView.classList.remove('hidden');
+        }
+
+        function lockVault() {
+            document.getElementById('unlockedFolderView').classList.add('hidden');
+            document.getElementById('passwordCard').classList.remove('hidden');
+        }
+
+        // Copy Link to Clipboard
+        function copyToClipboard(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHtml = btnElement.innerHTML;
+                btnElement.innerHTML = `<i class="fa-solid fa-check text-emerald-400 mr-1"></i> Copied!`;
+                setTimeout(() => {
+                    btnElement.innerHTML = originalHtml;
+                }, 2000);
+            }).catch(() => {
+                alert("কপি করা সম্ভব হয়নি। লিংক ম্যানুয়ালি সিলেক্ট করে কপি করুন।");
+            });
+        }
+
+        // ================= ADMIN HANDLERS =================
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminMasterPassword').value.trim();
+            
+            if (pass === ADMIN_PASS_HASH) {
+                isAdminLoggedIn = true;
+                document.getElementById('adminAuthCard').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                renderAdminFolders();
+            } else {
+                alert("ভুল মাস্টার পাসওয়ার্ড!");
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminMasterPassword').value = '';
+            document.getElementById('adminAuthCard').classList.remove('hidden');
+            document.getElementById('adminDashboard').classList.add('hidden');
+        }
+
+        function addMoreLinkInput() {
+            const container = document.getElementById('linkInputsContainer');
+            const div = document.createElement('div');
+            div.className = 'flex gap-2';
+            div.innerHTML = `
+                <input type="text" placeholder="লিংকের নাম" class="link-title-input w-1/3 bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                <input type="url" placeholder="URL (https://...)" class="link-url-input w-2/3 bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none" required>
+            `;
+            container.appendChild(div);
+        }
+
+        function handleCreateFolder(e) {
+            e.preventDefault();
+            const name = document.getElementById('newFolderName').value.trim();
+            const password = document.getElementById('newFolderPassword').value.trim();
+            const description = document.getElementById('newFolderDesc').value.trim();
+
+            if (vaultData.some(f => f.password === password)) {
+                alert("এই পাসওয়ার্ডটি দিয়ে ইতোমধ্যে একটি ফোল্ডার রয়েছে! অনুগ্রহ করে অন্য পাসওয়ার্ড ব্যবহার করুন।");
+                return;
+            }
+
+            const titles = document.querySelectorAll('.link-title-input');
+            const urls = document.querySelectorAll('.link-url-input');
+            const links = [];
+
+            urls.forEach((urlInput, index) => {
+                const u = urlInput.value.trim();
+                const t = titles[index] ? titles[index].value.trim() : '';
+                if (u) {
+                    links.push({ title: t || 'ফাইল লিংক', url: u });
+                }
+            });
+
+            const newFolder = {
+                id: 'folder-' + Date.now(),
+                name,
+                password,
+                description,
+                links
+            };
+
+            vaultData.push(newFolder);
+            saveVaultData();
+            renderAdminFolders();
+
+            e.target.reset();
+            document.getElementById('linkInputsContainer').innerHTML = `
+                <div class="flex gap-2">
+                    <input type="text" placeholder="লিংকের নাম (যেমন: Google Drive Link)" class="link-title-input w-1/3 bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                    <input type="url" placeholder="URL (https://...)" class="link-url-input w-2/3 bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none" required>
+                </div>
+            `;
+            alert("নতুন ফোল্ডার সফলভাবে যোগ করা হয়েছে!");
+        }
+
+        function deleteFolder(id) {
+            if (confirm("আপনি কি নিশ্চিত যে এই ফোল্ডারটি মুছে ফেলতে চান?")) {
+                vaultData = vaultData.filter(f => f.id !== id);
+                saveVaultData();
+                renderAdminFolders();
+            }
+        }
+
+        function renderAdminFolders() {
+            const listEl = document.getElementById('adminFoldersList');
+            const badgeEl = document.getElementById('folderCountBadge');
+            
+            badgeEl.innerText = `${vaultData.length} Folders`;
+            listEl.innerHTML = '';
+
+            if (vaultData.length === 0) {
+                listEl.innerHTML = `<p class="text-sm text-slate-500 text-center py-4">এখনো কোন ফোল্ডার তৈরি করা হয়নি।</p>`;
+                return;
+            }
+
+            vaultData.forEach(folder => {
+                const item = document.createElement('div');
+                item.className = "glass-card p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-800/80";
+                item.innerHTML = `
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h4 class="font-bold text-base text-white">${escapeHtml(folder.name)}</h4>
+                            <span class="text-xs bg-indigo-500/20 text-indigo-300 font-mono px-2 py-0.5 rounded border border-indigo-500/30">Key: ${escapeHtml(folder.password)}</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">${escapeHtml(folder.description || 'বিবরণ নেই')}</p>
+                        <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-link mr-1"></i> ${folder.links ? folder.links.length : 0} টি লিংক সংযুক্ত</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="deleteFolder('${folder.id}')" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-3 py-1.5 rounded-lg text-xs transition border border-red-500/20">
+                            <i class="fa-solid fa-trash mr-1"></i> Delete
+                        </button>
                     </div>
                 `;
-            } else {
-                alert('ভুল পাসওয়ার্ড!');
-            }
+                listEl.appendChild(item);
+            });
+        }
+
+        // Backup Export Data
+        function exportData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(vaultData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `vault_backup_${Date.now()}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Restore JSON Data
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedVault = JSON.parse(e.target.result);
+                    if (Array.isArray(importedVault)) {
+                        vaultData = importedVault;
+                        saveVaultData();
+                        renderAdminFolders();
+                        alert("ডাটা সফলভাবে রিস্টোর হয়েছে!");
+                    } else {
+                        alert("ফাইল ফরম্যাট সঠিক নয়!");
+                    }
+                } catch (err) {
+                    alert("JSON ফাইল প্রসেস করতে সমস্যা হয়েছে।");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Helper Utility to Escape HTML
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 </body>
